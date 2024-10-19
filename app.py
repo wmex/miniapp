@@ -45,7 +45,7 @@ def register():
             db.session.add(new_user)
             db.session.commit()
             flash('Registration successful!', 'success')
-            return redirect(url_for('login'))
+            return redirect('https://miniapp-zhgm.onrender.com/login')
     return render_template('register.html', form=form)
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -56,7 +56,7 @@ def login():
         if user and user.verify_password(form.password.data):
             login_user(user)  # Log in the user
             flash('Login successful!', 'success')
-            return redirect(url_for('main'))  # Redirect to the main page
+            return redirect('https://miniapp-zhgm.onrender.com/main')  # Redirect to the main page
         else:
             flash('Login failed. Check your username and password.', 'danger')
     return render_template('login.html', form=form)
