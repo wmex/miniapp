@@ -4,10 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .header {
+            background-color: #0078FF; /* Telegram color */
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .content {
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .content h2 {
+            margin-top: 0;
+            color: #0078FF; /* Telegram color */
+        }
+
+        .profile-info {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .profile-info p {
+            margin: 5px 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #0078FF; /* Telegram color */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .back-link:hover {
+            background-color: #0056b3; /* Darker hover color */
+        }
+    </style>
 </head>
 <body>
-    <h1>Your Profile</h1>
-    <p>Details about the user will go here.</p>
-    <a href="{{ url_for('main') }}">Back to Main Page</a>
+    <div class="header">
+        <h1>Your Profile</h1>
+    </div>
+    <div class="content">
+        <h2>User Details</h2>
+        <div class="profile-info">
+            <p><strong>Username:</strong> {{ username }}</p>
+            <p><strong>Role:</strong> {{ 'HR' if is_hr else 'Candidate' }}</p>
+            <!-- Add more user details as needed -->
+        </div>
+        <a href="{{ url_for('main') }}" class="back-link">Back to Main Page</a>
+    </div>
 </body>
 </html>

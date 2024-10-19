@@ -4,30 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        /* Add your styles here */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
         }
+
         .header {
-            background-color: #333;
+            background-color: #0078FF; /* Telegram color */
             color: white;
-            padding: 15px;
+            padding: 20px;
             text-align: center;
         }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
         .nav {
             margin: 15px 0;
         }
+
         .nav a {
             margin: 0 15px;
-            color: #333;
+            color: white;
             text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
         }
+
+        .nav a:hover {
+            color: #ffdd57; /* Hover color */
+        }
+
         .content {
             padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
+
+        .content h2 {
+            margin-top: 0;
+            color: #0078FF; /* Telegram color */
+        }
+
+        .vacancy-list, .candidate-list {
+            margin-top: 20px;
+        }
+
+        .list-item {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            transition: background-color 0.3s;
+        }
+
+        .list-item:hover {
+            background-color: #e0e0e0; /* Hover effect */
         }
     </style>
 </head>
@@ -42,9 +82,19 @@
     </div>
     <div class="content">
         <h2>Vacancies</h2>
-        <p>List of vacancies will go here.</p>
+        <div class="vacancy-list">
+            <div class="list-item">Vacancy 1: Software Developer</div>
+            <div class="list-item">Vacancy 2: Data Analyst</div>
+            <div class="list-item">Vacancy 3: Project Manager</div>
+        </div>
+
         <h2>Candidates</h2>
-        <p>List of candidates will go here.</p>
+        <div class="candidate-list">
+            <div class="list-item">Candidate 1: John Doe</div>
+            <div class="list-item">Candidate 2: Jane Smith</div>
+            <div class="list-item">Candidate 3: Alice Johnson</div>
+        </div>
     </div>
 </body>
 </html>
+
