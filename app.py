@@ -11,9 +11,17 @@ app = Flask(__name__, template_folder='templates')
 app.config['SECRET_KEY'] = 'your_secret_key'  # Change this
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'  # Change the database URI as needed
 db.init_app(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+
 @app.before_request
 def create_tables():
     db.create_all()
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 @app.route('/')
 def home():
@@ -47,11 +55,14 @@ def login():
         user = User.query.filter_by(username=form.username.data).first()
         if user and user.verify_password(form.password.data):
             login_user(user)  # Log in the user
-            return redirect(url_for('main'))
+            flash('Login successful!', 'success')
+            return redirect(url_for('main'))  # Redirect to the main page
         else:
             flash('Login failed. Check your username and password.', 'danger')
     return render_template('login.html', form=form)
-@app.route(rule='/main')  # Require login to access this route
+@app.route('/main')
+@login_required
+# Require login to access this route
 def main():
     return render_template('main_page.html', username=current_user.username)
 
