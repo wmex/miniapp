@@ -26,7 +26,7 @@ def load_user(user_id):
 
 @app.route('/')
 def home():
-    return redirect(f"{BASE_URL}/register")
+    return redirect(url_for("register"))
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
