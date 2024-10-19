@@ -5,11 +5,12 @@ from werkzeug.security import generate_password_hash
 from database import db, User  # Import the database and User model
 from forms import RegistrationForm, LoginForm  # Import forms from the forms module
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-
+from config import BASE_URL
 
 app = Flask(__name__, template_folder='templates')
 app.config['SECRET_KEY'] = 'your_secret_key'  # Change this
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'  # Change the database URI as needed
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 db.init_app(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -25,7 +26,7 @@ def load_user(user_id):
 
 @app.route('/')
 def home():
-    return redirect(url_for('register'))
+    return redirect(f"{BASE_URL}/register")
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
@@ -45,7 +46,7 @@ def register():
             db.session.add(new_user)
             db.session.commit()
             flash('Registration successful!', 'success')
-            return redirect('https://miniapp-zhgm.onrender.com/login')
+            return redirect(f"{BASE_URL}/login")
     return render_template('register.html', form=form)
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -56,7 +57,7 @@ def login():
         if user and user.verify_password(form.password.data):
             login_user(user)  # Log in the user
             flash('Login successful!', 'success')
-            return redirect('https://miniapp-zhgm.onrender.com/main')  # Redirect to the main page
+            return redirect(f"{BASE_URL}/main")  # Redirect to the main page
         else:
             flash('Login failed. Check your username and password.', 'danger')
     return render_template('login.html', form=form)
@@ -72,4 +73,4 @@ def profile():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
